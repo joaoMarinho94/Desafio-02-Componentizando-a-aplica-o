@@ -13,16 +13,19 @@ interface Props {
 
 export function Content({ selectedGenreId }: Props) {
   const [movies, setMovies] = useState<MovieProps[]>([]);
+  const [loading, setLoading] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState<GenreResponseProps>(
     {} as GenreResponseProps
   );
 
   useEffect(() => {
+    setLoading(true);
     api
       .get<MovieProps[]>(`movies/?Genre_id=${selectedGenreId}`)
       .then(({ data }) => {
         setMovies(data);
-      });
+      })
+      .finally(() => setLoading(false));
 
     api
       .get<GenreResponseProps>(`genres/${selectedGenreId}`)
@@ -35,19 +38,27 @@ export function Content({ selectedGenreId }: Props) {
     <div className="container">
       <Header selectedGenre={selectedGenre} />
 
-      <main>
-        <div className="movies-list">
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie.imdbID}
-              title={movie.Title}
-              poster={movie.Poster}
-              runtime={movie.Runtime}
-              rating={movie.Ratings[0].Value}
-            />
-          ))}
+      {loading && (
+        <div className="loading">
+          <img src='https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif' width='30' alt="loading" />
         </div>
-      </main>
+      )}
+
+      {!loading && (
+        <main>
+          <div className="movies-list">
+            {movies.map((movie) => (
+              <MovieCard
+                key={movie.imdbID}
+                title={movie.Title}
+                poster={movie.Poster}
+                runtime={movie.Runtime}
+                rating={movie.Ratings[0].Value}
+              />
+            ))}
+          </div>
+        </main>
+      )}
     </div>
   );
 }
