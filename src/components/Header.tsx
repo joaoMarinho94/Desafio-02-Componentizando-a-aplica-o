@@ -1,10 +1,11 @@
+import { memo } from "react";
 import { GenreResponseProps } from "../interfaces";
 
 interface Props {
   selectedGenre: GenreResponseProps;
 }
 
-export function Header({ selectedGenre }: Props) {
+function HeaderComponent({ selectedGenre }: Props) {
   return (
     <header>
       <span className="category">
@@ -13,3 +14,7 @@ export function Header({ selectedGenre }: Props) {
     </header>
   );
 }
+
+export const Header = memo(HeaderComponent, (prevProps, nextProps) =>
+  Object.is(prevProps.selectedGenre.title, nextProps.selectedGenre.title)
+);

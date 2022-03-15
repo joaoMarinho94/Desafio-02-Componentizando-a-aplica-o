@@ -1,4 +1,6 @@
-const Logo: React.FC = () => {
+import { memo } from "react";
+
+function LogoComponent() {
   return (
     <span>
       Watch<p>Me</p>
@@ -6,4 +8,4 @@ const Logo: React.FC = () => {
   );
 };
 
-export default Logo;
+export default memo(LogoComponent);
