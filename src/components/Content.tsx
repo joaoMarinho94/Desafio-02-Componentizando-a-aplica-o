@@ -1,48 +1,21 @@
-import { useEffect, useState } from "react";
-
+import { GenreResponseProps, MovieProps } from "../interfaces";
+import "../styles/content.scss";
+import { Header } from "./Header";
+import { Loading } from "./Loading";
 import { MovieCard } from "./MovieCard";
 
-import "../styles/content.scss";
-import { api } from "../services/api";
-import { Header } from "./Header";
-import { GenreResponseProps, MovieProps } from "../interfaces";
-
 interface Props {
-  selectedGenreId: number;
+  selectedGenre: GenreResponseProps;
+  loading: boolean;
+  movies: MovieProps[];
 }
 
-export function Content({ selectedGenreId }: Props) {
-  const [movies, setMovies] = useState<MovieProps[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [selectedGenre, setSelectedGenre] = useState<GenreResponseProps>(
-    {} as GenreResponseProps
-  );
-
-  useEffect(() => {
-    setLoading(true);
-    api
-      .get<MovieProps[]>(`movies/?Genre_id=${selectedGenreId}`)
-      .then(({ data }) => {
-        setMovies(data);
-      })
-      .finally(() => setLoading(false));
-
-    api
-      .get<GenreResponseProps>(`genres/${selectedGenreId}`)
-      .then(({ data }) => {
-        setSelectedGenre(data);
-      });
-  }, [selectedGenreId]);
-
+export function Content({ selectedGenre, movies, loading }: Props) {
   return (
     <div className="container">
       <Header selectedGenre={selectedGenre} />
 
-      {loading && (
-        <div className="loading">
-          <img src='https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif' width='30' alt="loading" />
-        </div>
-      )}
+      {loading && <Loading />}
 
       {!loading && (
         <main>
