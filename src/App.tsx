@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Content } from "./components/Content";
 import { SideBar } from "./components/SideBar";
 import { GenreResponseProps, MovieProps } from "./interfaces";
@@ -36,9 +36,9 @@ export function App() {
       });
   }, [selectedGenreId]);
 
-  const handleClickButton = (id: number) => {
+  const handleClickButton = useCallback((id: number) => {
     setSelectedGenreId(id);
-  };
+  }, []);
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
