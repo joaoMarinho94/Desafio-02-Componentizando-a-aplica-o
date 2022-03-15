@@ -19,7 +19,7 @@ O projeto WatchMe é uma listagem de filmes, desenvolvida em reactjs. Onde podem
 
 Essa aplicação foi desenvolvida com o intuito de praticar a componentização de componentes no reactjs e o consumo de api's restfull com axios.
 
-Além desse primeiro desafio também foi proposto melhorar a performance da aplicação usando conceitos do próprio reactjs como memo (memorização de componentes), useMemo (memorização de cálculos complexos), useCallback (memorização de funções) e virtualização para grandes listas. 
+Além desse primeiro desafio também foi proposto melhorar a performance da aplicação usando conceitos do próprio reactjs como memo (memorização de componentes), useMemo (memorização de cálculos complexos), useCallback (memorização de funções). 
 
 
 <h2 id="tecnologias">:rocket: Tecnologias</h2> 
@@ -29,8 +29,6 @@ As seguintes tecnologias foram utilizadas no projeto:
 - [TypeScript](https://www.typescriptlang.org/)
 - [React.js](https://reactjs.org/)
 - [Axios](https://prismic.io/)
-- [Loadsh](https://lodash.com/)
-- [React-Virtualized](https://github.com/bvaughn/react-virtualized)
 
 <h2 id="melhorias">:hammer_and_wrench: Melhorias</h2> 
 
